@@ -1,1 +1,41 @@
-<p>registration works!</p>
+<div *ngIf="pageId === 1" class="registration-container">
+  <h2>Registration 1 of 3</h2>
+  <input type="email" [(ngModel)]="newUser.email" name="email" placeholder="Email*" required  (input)="validateEmail()" />
+  <div *ngIf="!emailInvalid() && !emailExists" class="field-message">&nbsp;</div>
+  <div *ngIf="emailInvalid() && !emailExists" class="error-message">Email must contain &commat;.xx.xx</div>
+  <div *ngIf="emailExists" class="error-message">Email already exists. Please use a different email.</div>
+  <input type="password" [(ngModel)]="newUser.password" name="password" placeholder="Password*" required (input)="validPassword()"/>
+  <div class="field-message">&nbsp;</div>
+  <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Password confirmation*" (input)="validPassword()"/>
+  <div *ngIf="!isPasswordValid && confirmPassword" class="error-message">Passwords don't match</div>
+  <div *ngIf="isPasswordValid && confirmPassword || !confirmPassword" class="field-message">&nbsp;</div>
+  <button style="margin-top: 30px;" (click)="nextPage(2)">Next</button>
+  <a routerLink="/">Login</a>
+</div>
+<div *ngIf="pageId === 2"  class="registration-container">
+  <h2>Registration 2 of 3</h2>
+  <input type="text" [(ngModel)]="newUser.name" name="name" placeholder="Name*" required />
+  <div class="field-message">&nbsp;</div>
+  <input type="text" [(ngModel)]="newUser.surname" name="surname" placeholder="Surname*" required />
+  <div class="field-message">&nbsp;</div>
+  <input type="text" [(ngModel)]="newUser.phone" name="phone" placeholder="Phone number*" required />
+  <div *ngIf="!phoneInvalid()" class="field-message">&nbsp;</div>
+  <div *ngIf="phoneInvalid()" class="error-message">+7xxxxxxxxxx</div>
+  <div class="gender-selection">
+    <label><input type="radio" [(ngModel)]="newUser.gender" name="gender" value="male" />Male</label>
+    <label><input type="radio" [(ngModel)]="newUser.gender" name="gender" value="female" />Female</label>
+  </div>
+  <div class="field-message">Required field*</div>
+  <button class="back-button" (click)="nextPage(1)" type="submit">Back</button>
+  <button (click)="nextPage(3)">Next</button>
+  <a routerLink="/">Login</a>
+</div>
+<div *ngIf="pageId === 3" class="registration-container">
+  <h2>Registration 3 of 3</h2>
+  <input type="date" [(ngModel)]="newUser.dateOfBirth" placeholder="dd, mm, yyyy" name="dateOfBirth"/>
+  <input type="text" [(ngModel)]="newUser.city"  name="city" placeholder="City of residence"/>
+  <textarea [(ngModel)]="newUser.info" name="info" placeholder="Info" rows="5" maxlength="200" class="limited-textarea"></textarea>
+  <button class="back-button"  (click)="nextPage(2)">Back</button>
+  <button [disabled]="emailInvalid() || emailExists ||(!isPasswordValid && confirmPassword) || phoneInvalid() || !newUser.email || !newUser.password || !confirmPassword || !newUser.name || !newUser.surname || !newUser.phone || !newUser.gender" (click)="registration()" type="submit">Register</button>
+  <a routerLink="/">Login</a>
+</div>

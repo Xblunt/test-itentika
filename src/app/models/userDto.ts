@@ -1,11 +1,11 @@
 export class UserDto {
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  name: string;
+  surname: string;
   phone: string;
-  dateOfBirth?: string;
+  dateOfBirth: string | null;
   gender: string;
-  city?: string;
-  info?: string;
+  city: string | null;
+  info: string | null;
 }

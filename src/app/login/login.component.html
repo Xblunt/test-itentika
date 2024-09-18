@@ -1,1 +1,13 @@
-<p>login works!</p>
+<div class="login-container">
+  <h2>Login</h2>
+  <input type="email" [(ngModel)]="loginData.email" name="email" placeholder="Email" required />
+  <div *ngIf="error !== false" class="error-message">&nbsp;</div>
+  <div *ngIf="error === false && !emailInvalid()" class="error-message">Incorrect email</div>
+  <div *ngIf="emailInvalid()" class="error-message">Email must contain &commat;.xx.xx</div>
+  <input type="password" [(ngModel)]="loginData.password" name="password" placeholder="Password" required />
+  <div *ngIf="error !== true" class="error-message">&nbsp;</div>
+  <div *ngIf="error === true" class="error-message">Incorrect password</div>
+  <button [disabled]="!loginData.email || !loginData.password || emailInvalid()" (click)="login()">Login</button>
+  <!-- <button [disabled]="!loginData.email || !loginData.password" (click)="login()">Login</button> -->
+  <a routerLink="/register">Register</a>
+</div>

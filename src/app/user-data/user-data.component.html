@@ -1,2 +1,39 @@
 <app-header></app-header>
-<p>user-data works!</p>
+<div class="user-profile">
+  <div class="user-info">
+    <div class="column">
+      <div class="info-item">
+        <div class="label">Full name:</div>
+        <div>{{ userData.name }}  {{ userData.surname }}</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Date of birth:</div>
+        <div>{{ userData.dateOfBirth ? userData.dateOfBirth : '-' }}</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Gender:</div>
+        <div>{{ userData.gender}}</div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="info-item">
+        <div class="label">Email:</div>
+        <div>{{ userData.email }}</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Phone number:</div>
+        <div>{{ userData.phone }}</div>
+      </div>
+      <div class="info-item">
+        <div class="label">City:</div>
+        <div>{{ userData.city ? userData.city : '-' }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="additional-info">
+    <div class="label">Additional information:</div>
+    <div class="input-container">
+      <input type="text" disabled [value]="userData.info ? userData.info : ''" readonly />
+    </div>
+  </div>
+</div>
